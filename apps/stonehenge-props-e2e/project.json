@@ -1,0 +1,28 @@
+{
+  "root": "apps/stonehenge-props-e2e",
+  "sourceRoot": "apps/stonehenge-props-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/stonehenge-props-e2e/cypress.json",
+        "devServerTarget": "stonehenge-props:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "stonehenge-props:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/stonehenge-props-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["stonehenge-props"]
+}
