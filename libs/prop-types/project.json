@@ -1,0 +1,23 @@
+{
+  "root": "libs/prop-types",
+  "sourceRoot": "libs/prop-types/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/prop-types/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/prop-types"],
+      "options": {
+        "jestConfig": "libs/prop-types/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

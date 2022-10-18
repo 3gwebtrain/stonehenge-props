@@ -3,6 +3,11 @@
   "projects": {
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
+    "footer": "libs/footer",
+    "footer-public": "libs/footer-public",
+    "header": "libs/header",
+    "header-public": "libs/header-public",
+    "prop-types": "libs/prop-types",
     "stonehenge-props": "apps/stonehenge-props",
     "stonehenge-props-e2e": "apps/stonehenge-props-e2e"
   }

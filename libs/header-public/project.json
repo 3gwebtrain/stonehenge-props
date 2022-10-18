@@ -1,0 +1,23 @@
+{
+  "root": "libs/header-public",
+  "sourceRoot": "libs/header-public/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/header-public/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/header-public"],
+      "options": {
+        "jestConfig": "libs/header-public/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

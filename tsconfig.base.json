@@ -15,7 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@stonehenge/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@stonehenge/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@stonehenge/footer": ["libs/footer/src/index.ts"],
+      "@stonehenge/footer-public": ["libs/footer-public/src/index.ts"],
+      "@stonehenge/header": ["libs/header/src/index.ts"],
+      "@stonehenge/header-public": ["libs/header-public/src/index.ts"],
+      "@stonehenge/prop-types": ["libs/prop-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

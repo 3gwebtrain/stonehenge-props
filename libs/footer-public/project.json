@@ -1,0 +1,23 @@
+{
+  "root": "libs/footer-public",
+  "sourceRoot": "libs/footer-public/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/footer-public/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/footer-public"],
+      "options": {
+        "jestConfig": "libs/footer-public/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

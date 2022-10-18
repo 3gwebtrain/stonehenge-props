@@ -1,0 +1,10 @@
+nav.app-nav {
+  ul {
+    display: flex;
+    justify-content: end;
+    font-size: 1.6rem;
+    gap: 0 4rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
