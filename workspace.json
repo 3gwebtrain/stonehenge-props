@@ -5,8 +5,10 @@
     "api-interfaces": "libs/api-interfaces",
     "footer": "libs/footer",
     "footer-public": "libs/footer-public",
+    "forms": "libs/forms",
     "header": "libs/header",
     "header-public": "libs/header-public",
+    "modals": "libs/modals",
     "prop-types": "libs/prop-types",
     "stonehenge-props": "apps/stonehenge-props",
     "stonehenge-props-e2e": "apps/stonehenge-props-e2e"

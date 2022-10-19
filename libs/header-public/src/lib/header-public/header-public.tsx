@@ -19,19 +19,25 @@ export function HeaderPublic({
 
   return (
     <nav className={navStyle['app-nav']}>
-      <Row>
-        <Col lg={12}>
+      <Row justify="space-between">
+        <Col lg={12} md={12} sm={24}>
           <h1>Public header</h1>
         </Col>
-        <Col lg={12}>
-          <ul className="navi-links">
+        <Col lg={12} md={12} sm={24}>
+          <Row align="middle" justify="end">
             {newSchema &&
               newSchema.map((navItem) => {
                 if (navItem.type && navItem.type === 'link') {
                   return (
-                    <li key={navItem.name}>
+                    <Col
+                      key={navItem.name}
+                      lg={2}
+                      md={2}
+                      xs={24}
+                      style={{ border: '1px solid red' }}
+                    >
                       <Link to={navItem.link || ''}>{navItem.name}</Link>
-                    </li>
+                    </Col>
                   );
                 }
                 return (
@@ -40,7 +46,7 @@ export function HeaderPublic({
                   </button>
                 );
               })}
-          </ul>
+          </Row>
         </Col>
       </Row>
     </nav>
