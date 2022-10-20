@@ -3,29 +3,39 @@ import { HeaderPublic } from '@stonehenge/header-public';
 import { ModalLogin } from '@stonehenge/modals';
 import { RegisterFormProps } from '@stonehenge/prop-types';
 import { ReactElement, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import { AppDispatch } from '../../storeApp/appStore';
+import { registerUser } from '../storePublic/registerSlice';
 import { HeaderPublicLinkSchema } from './header-link.schema';
 import layoutStyle from './layout-public.module.scss';
 
 export function LayoutPublic() {
+  const dispatch = useDispatch<AppDispatch>();
   const [modalActive, setModalActive] = useState(false);
   const [newChildren, setnewChildren] = useState<ReactElement | undefined>(undefined);
+
+  const onRegisterSubmit = (values: RegisterFormProps) => {
+    dispatch(registerUser(values));
+    setModalActive(false);
+  };
+  const onLoginSubmit = (values: RegisterFormProps) => {
+    console.log('form value', values);
+  };
 
   const openPop = (temp: string) => {
     if (temp === 'register') {
       setnewChildren(<FormRegister closePop={closePop} registerSubmit={onRegisterSubmit} />);
     }
     if (temp === 'login') {
-      setnewChildren(<FormLogin closePop={closePop} registerSubmit={onRegisterSubmit} />);
+      setnewChildren(<FormLogin closePop={closePop} registerSubmit={onLoginSubmit} />);
     }
     setModalActive(true);
   };
   const closePop = () => {
     setModalActive(false);
   };
-  const onRegisterSubmit = (values: RegisterFormProps) => {
-    console.log('form value', values);
-  };
+
   return (
     <section className={layoutStyle['app-wrapper']}>
       <header className="app-header">
