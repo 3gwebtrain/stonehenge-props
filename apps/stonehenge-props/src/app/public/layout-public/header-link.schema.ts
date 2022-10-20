@@ -17,6 +17,11 @@ export const HeaderPublicLinkSchema: HeaderLinkProps[] = [
     type: 'link',
   },
   {
+    name: 'Register',
+    link: '/register',
+    type: 'link',
+  },
+  {
     name: 'Sign In',
     type: 'button',
   },

@@ -1,44 +1,33 @@
 import { FormRegister } from '@stonehenge/forms';
 import { HeaderPublic } from '@stonehenge/header-public';
 import { ModalLogin } from '@stonehenge/modals';
-import { ReactElement, useEffect, useState } from 'react';
+import { RegisterFormProps } from '@stonehenge/prop-types';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { HeaderPublicLinkSchema } from './header-link.schema';
 import layoutStyle from './layout-public.module.scss';
 
-export function LayoutPublic({
-  children,
-  parSignInInit,
-}: {
-  children: ReactElement;
-  parSignInInit: boolean;
-}) {
-  const [modalActive, setModalActive] = useState<boolean>(false);
-
-  useEffect(() => {
-    setModalActive(parSignInInit);
-  }, [parSignInInit]);
-  const submitRegisterForm = () => {
-    setModalActive(false);
-    console.log(parSignInInit);
-  };
-  const popupInit = () => {
-    console.log('hi from parent');
-  };
-
-  const openRegisterPop = () => {
+export function LayoutPublic() {
+  const [modalActive, setModalActive] = useState(false);
+  const openPop = () => {
     setModalActive(true);
   };
-
+  const closePop = () => {
+    setModalActive(false);
+  };
+  const onRegisterSubmit = (values: RegisterFormProps) => {
+    console.log('form value', values);
+  };
   return (
     <section className={layoutStyle['app-wrapper']}>
       <header className="app-header">
-        <ModalLogin
-          modalActive={modalActive}
-          children={<FormRegister onSubmit={submitRegisterForm} />}
-        />
-        <HeaderPublic schema={HeaderPublicLinkSchema} popInit={popupInit} />
+        <ModalLogin isModal={modalActive} closePop={closePop} children={<FormRegister closePop={closePop} registerSubmit={onRegisterSubmit} />} />
+        <HeaderPublic schema={HeaderPublicLinkSchema} />
       </header>
-      <main className="app-main">{children}</main>
+      <main className="app-main">
+        <h1>Hi {modalActive}</h1>
+        <Outlet context={openPop} />
+      </main>
       <footer className="app-footer"></footer>
     </section>
   );

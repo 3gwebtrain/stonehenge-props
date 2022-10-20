@@ -6,10 +6,8 @@ import navStyle from './header-public.module.scss';
 
 export function HeaderPublic({
   schema,
-  popInit,
 }: {
   schema: HeaderLinkProps[];
-  popInit: () => void;
 }): ReactElement {
   const [newSchema, setNewSchema] = useState<HeaderLinkProps[]>();
 
@@ -40,11 +38,7 @@ export function HeaderPublic({
                     </Col>
                   );
                 }
-                return (
-                  <button key={navItem.name} onClick={() => popInit()}>
-                    {navItem.name}
-                  </button>
-                );
+                return <button key={navItem.name}>{navItem.name}</button>;
               })}
           </Row>
         </Col>
