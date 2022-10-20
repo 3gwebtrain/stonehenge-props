@@ -4,11 +4,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import navStyle from './header-public.module.scss';
 
-export function HeaderPublic({
-  schema,
-}: {
-  schema: HeaderLinkProps[];
-}): ReactElement {
+export function HeaderPublic({ schema, openPop }: { schema: HeaderLinkProps[]; openPop: (temp: string) => void }): ReactElement {
   const [newSchema, setNewSchema] = useState<HeaderLinkProps[]>();
 
   useEffect(() => {
@@ -27,18 +23,16 @@ export function HeaderPublic({
               newSchema.map((navItem) => {
                 if (navItem.type && navItem.type === 'link') {
                   return (
-                    <Col
-                      key={navItem.name}
-                      lg={2}
-                      md={2}
-                      xs={24}
-                      style={{ border: '1px solid red' }}
-                    >
+                    <Col key={navItem.name} lg={2} md={2} xs={24} style={{ border: '1px solid red' }}>
                       <Link to={navItem.link || ''}>{navItem.name}</Link>
                     </Col>
                   );
                 }
-                return <button key={navItem.name}>{navItem.name}</button>;
+                return (
+                  <button key={navItem.name} onClick={() => openPop('login')}>
+                    {navItem.name}
+                  </button>
+                );
               })}
           </Row>
         </Col>

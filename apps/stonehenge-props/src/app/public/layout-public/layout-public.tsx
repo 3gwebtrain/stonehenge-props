@@ -1,15 +1,23 @@
-import { FormRegister } from '@stonehenge/forms';
+import { FormLogin, FormRegister } from '@stonehenge/forms';
 import { HeaderPublic } from '@stonehenge/header-public';
 import { ModalLogin } from '@stonehenge/modals';
 import { RegisterFormProps } from '@stonehenge/prop-types';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { HeaderPublicLinkSchema } from './header-link.schema';
 import layoutStyle from './layout-public.module.scss';
 
 export function LayoutPublic() {
   const [modalActive, setModalActive] = useState(false);
-  const openPop = () => {
+  const [newChildren, setnewChildren] = useState<ReactElement | undefined>(undefined);
+
+  const openPop = (temp: string) => {
+    if (temp === 'register') {
+      setnewChildren(<FormRegister closePop={closePop} registerSubmit={onRegisterSubmit} />);
+    }
+    if (temp === 'login') {
+      setnewChildren(<FormLogin closePop={closePop} registerSubmit={onRegisterSubmit} />);
+    }
     setModalActive(true);
   };
   const closePop = () => {
@@ -21,8 +29,8 @@ export function LayoutPublic() {
   return (
     <section className={layoutStyle['app-wrapper']}>
       <header className="app-header">
-        <ModalLogin isModal={modalActive} closePop={closePop} children={<FormRegister closePop={closePop} registerSubmit={onRegisterSubmit} />} />
-        <HeaderPublic schema={HeaderPublicLinkSchema} />
+        {newChildren && <ModalLogin isModal={modalActive} closePop={closePop} children={newChildren} />}
+        <HeaderPublic openPop={openPop} schema={HeaderPublicLinkSchema} />
       </header>
       <main className="app-main">
         <h1>Hi {modalActive}</h1>

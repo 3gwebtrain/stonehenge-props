@@ -26,7 +26,6 @@ export function FormRegister({ closePop, registerSubmit }: RegisterFormFuncProps
           </Button>
         </Form.Item>
       </Form>
-      &nbsp;
     </div>
   );
 }
