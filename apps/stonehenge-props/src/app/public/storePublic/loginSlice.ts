@@ -1,21 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RegisterFormProps, UserRegisterProps } from '@stonehenge/prop-types';
+import { UserLoginProps } from '@stonehenge/prop-types';
 import axios, { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import { environment } from '../../../environments/environment';
 
-const initialUser: UserRegisterProps = {
-  name: '',
+const initialUser: UserLoginProps = {
   email: '',
   password: '',
-  status: '',
 };
 
-export const registerUser = createAsyncThunk('post/user', async (user: RegisterFormProps) => {
+export const loginAdminUser = createAsyncThunk('post/login', async (user: UserLoginProps) => {
   try {
-    const response = await axios.post(environment.BASE_URL + '/user/register', user);
+    const response = await axios.post(environment.BASE_URL + '/user/admin-login', user);
+    console.log('response', response);
     if (response.data.success) {
       toast.success(response.data.message);
+      toast('Redirecting to Home page');
+      localStorage.setItem('token', response.data.data);
     } else {
       toast.error(response.data.message);
     }
@@ -25,8 +26,8 @@ export const registerUser = createAsyncThunk('post/user', async (user: RegisterF
   }
 });
 
-export const RegisterSlice = createSlice({
-  name: 'User',
+export const AdminLoginSlice = createSlice({
+  name: 'UserLogin',
   initialState: initialUser,
   reducers: {},
 });

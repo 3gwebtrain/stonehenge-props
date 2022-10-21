@@ -4,3 +4,8 @@ export interface UserRegisterProps {
   password: string;
   status: string;
 }
+
+export interface UserLoginProps {
+  email: string;
+  password: string;
+}

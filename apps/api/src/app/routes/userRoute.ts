@@ -1,6 +1,8 @@
 import * as bcrypt from 'bcrypt';
 import * as express from 'express';
 import { Request, Response } from 'express';
+import * as jwt from 'jsonwebtoken';
+import { environment } from '../../environments/environment';
 import { UserModel } from '../models/userModel';
 const router = express.Router();
 
@@ -9,7 +11,7 @@ router.post('/register', async (req: Request, res: Response) => {
   try {
     const isUserExist = await UserModel.findOne({ email: email });
     if (isUserExist) {
-      res.sendStatus(500).json({ message: 'User already exist', success: false });
+      return res.status(200).json({ message: 'User already exist', success: false });
     }
     const hashPassword = bcrypt.hashSync(password, 10);
     req.body.password = hashPassword;
@@ -21,9 +23,23 @@ router.post('/register', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/login', async (req: Request, res: Response) => {
+router.post('/admin-login', async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  console.log('email', email);
   try {
-  } catch (error) {}
+    const user = await UserModel.findOne({ email: email });
+    if (!user) {
+      return res.status(200).json({ message: 'User does not exist', success: false });
+    }
+    const passMatch = await bcrypt.compare(password, user.password);
+    if (!passMatch) {
+      return res.status(200).json({ message: 'Email / Password incorrect', success: false });
+    }
+    const token = jwt.sign({ id: user._id }, environment.secretkey, { expiresIn: '1d' });
+    return res.status(200).json({ message: 'Login successful', success: true, data: token });
+  } catch (error) {
+    return res.send(500).json({ message: 'Error loggin in', success: false, error });
+  }
 });
 
 export default router;

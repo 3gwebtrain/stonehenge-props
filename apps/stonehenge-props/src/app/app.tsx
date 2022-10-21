@@ -19,6 +19,7 @@ export const App: FC = () => {
             <Route path="admin-login" element={<AdminLogin />}></Route>
             <Route path="register" element={<AdminRegister />}></Route>
           </Route>
+
           <Route path="*" element={<Navigate to="/home" replace />}></Route>
         </Routes>
       </BrowserRouter>

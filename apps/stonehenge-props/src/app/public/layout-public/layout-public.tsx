@@ -3,10 +3,11 @@ import { HeaderPublic } from '@stonehenge/header-public';
 import { ModalLogin } from '@stonehenge/modals';
 import { RegisterFormProps } from '@stonehenge/prop-types';
 import { ReactElement, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { AppDispatch } from '../../storeApp/appStore';
-import { registerUser } from '../storePublic/registerSlice';
+import { loginAdminUser, registerUser } from '../storePublic';
 import { HeaderPublicLinkSchema } from './header-link.schema';
 import layoutStyle from './layout-public.module.scss';
 
@@ -20,7 +21,7 @@ export function LayoutPublic() {
     setModalActive(false);
   };
   const onLoginSubmit = (values: RegisterFormProps) => {
-    console.log('form value', values);
+    dispatch(loginAdminUser(values));
   };
 
   const openPop = (temp: string) => {
@@ -37,17 +38,20 @@ export function LayoutPublic() {
   };
 
   return (
-    <section className={layoutStyle['app-wrapper']}>
-      <header className="app-header">
-        {newChildren && <ModalLogin isModal={modalActive} closePop={closePop} children={newChildren} />}
-        <HeaderPublic openPop={openPop} schema={HeaderPublicLinkSchema} />
-      </header>
-      <main className="app-main">
-        <h1>Hi {modalActive}</h1>
-        <Outlet context={openPop} />
-      </main>
-      <footer className="app-footer"></footer>
-    </section>
+    <>
+      <Toaster position="top-center" reverseOrder={false} containerStyle={{ fontSize: '14px' }}></Toaster>
+      <section className={layoutStyle['app-wrapper']}>
+        <header className="app-header">
+          {newChildren && <ModalLogin isModal={modalActive} closePop={closePop} children={newChildren} />}
+          <HeaderPublic openPop={openPop} schema={HeaderPublicLinkSchema} />
+        </header>
+        <main className="app-main">
+          <h1>Hi {modalActive}</h1>
+          <Outlet context={openPop} />
+        </main>
+        <footer className="app-footer"></footer>
+      </section>
+    </>
   );
 }
 
