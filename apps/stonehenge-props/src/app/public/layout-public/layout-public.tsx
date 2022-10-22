@@ -24,6 +24,7 @@ export function LayoutPublic() {
     setModalActive(false);
   };
   const onLoginSubmit = async (values: UserLoginProps) => {
+    setModalActive(false);
     try {
       dispatch(showAlert());
       const response = await axios.post(environment.BASE_URL + '/user/admin-login', values);
@@ -41,7 +42,6 @@ export function LayoutPublic() {
       const err = error as AxiosError;
       throw new Error(err.message);
     }
-    setModalActive(false);
   };
 
   const openPop = (temp: string) => {
