@@ -3,6 +3,7 @@ import * as express from 'express';
 import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { environment } from '../../environments/environment';
+import AuthMiddleWare from '../middleWare/authMiddleWare';
 import { UserModel } from '../models/userModel';
 const router = express.Router();
 
@@ -39,6 +40,20 @@ router.post('/admin-login', async (req: Request, res: Response) => {
     return res.status(200).json({ message: 'Login successful', success: true, data: token });
   } catch (error) {
     return res.send(500).json({ message: 'Error loggin in', success: false, error });
+  }
+});
+
+router.post('/get-admin-info-by-id', AuthMiddleWare, async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.body;
+    const user = await UserModel.findOne({ _id: userId });
+    if (!user) {
+      return res.send(200).json({ message: 'User does not exist', success: false });
+    } else {
+      res.status(200).send({ success: true, data: { name: user.name, email: user.email } });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error getting user info', success: false, error });
   }
 });
 
