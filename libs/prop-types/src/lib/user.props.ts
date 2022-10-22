@@ -10,8 +10,3 @@ export interface UserLoginProps {
   password: string;
   status: string;
 }
-export interface UserLoggedInProps extends UserLoginProps {
-  userDetails: {
-    token: string;
-  };
-}
