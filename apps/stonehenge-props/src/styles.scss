@@ -9,3 +9,17 @@ html,
 body {
   font-size: 62.5%;
 }
+.spinner-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .spinner-border {
+    width: 5rem;
+    height: 5rem;
+    color: #fff;
+  }
+}

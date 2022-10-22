@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { environment } from '../../../environments/environment';
 import { AppDispatch } from '../../storeApp/appStore';
-import { registerUser } from '../storePublic';
+import { hideAlert, registerUser, showAlert } from '../storePublic';
 import { HeaderPublicLinkSchema } from './header-link.schema';
 import layoutStyle from './layout-public.module.scss';
 
@@ -25,7 +25,9 @@ export function LayoutPublic() {
   };
   const onLoginSubmit = async (values: UserLoginProps) => {
     try {
+      dispatch(showAlert());
       const response = await axios.post(environment.BASE_URL + '/user/admin-login', values);
+      dispatch(hideAlert());
       if (response.data.success) {
         toast.success(response.data.message);
         toast('Redirecting to Home page');
@@ -35,6 +37,7 @@ export function LayoutPublic() {
         toast.error(response.data.message);
       }
     } catch (error: unknown) {
+      dispatch(showAlert());
       const err = error as AxiosError;
       throw new Error(err.message);
     }
