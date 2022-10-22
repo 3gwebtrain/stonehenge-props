@@ -1,17 +1,20 @@
 import { FormLogin, FormRegister } from '@stonehenge/forms';
 import { HeaderPublic } from '@stonehenge/header-public';
 import { ModalLogin } from '@stonehenge/modals';
-import { RegisterFormProps } from '@stonehenge/prop-types';
+import { RegisterFormProps, UserLoginProps } from '@stonehenge/prop-types';
+import axios, { AxiosError } from 'axios';
 import { ReactElement, useState } from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { environment } from '../../../environments/environment';
 import { AppDispatch } from '../../storeApp/appStore';
-import { loginAdminUser, registerUser } from '../storePublic';
+import { registerUser } from '../storePublic';
 import { HeaderPublicLinkSchema } from './header-link.schema';
 import layoutStyle from './layout-public.module.scss';
 
 export function LayoutPublic() {
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const [modalActive, setModalActive] = useState(false);
   const [newChildren, setnewChildren] = useState<ReactElement | undefined>(undefined);
@@ -20,8 +23,22 @@ export function LayoutPublic() {
     dispatch(registerUser(values));
     setModalActive(false);
   };
-  const onLoginSubmit = (values: RegisterFormProps) => {
-    dispatch(loginAdminUser(values));
+  const onLoginSubmit = async (values: UserLoginProps) => {
+    try {
+      const response = await axios.post(environment.BASE_URL + '/user/admin-login', values);
+      if (response.data.success) {
+        toast.success(response.data.message);
+        toast('Redirecting to Home page');
+        localStorage.setItem('token', response.data.data);
+        navigate('/admin/home');
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error: unknown) {
+      const err = error as AxiosError;
+      throw new Error(err.message);
+    }
+    setModalActive(false);
   };
 
   const openPop = (temp: string) => {

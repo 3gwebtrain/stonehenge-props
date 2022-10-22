@@ -6,6 +6,7 @@ import AdminLogin from './public/admin-login/admin-login';
 import AdminRegister from './public/admin-register/admin-register';
 import HomePublic from './public/home-public/home-public';
 import LayoutPublic from './public/layout-public/layout-public';
+import HomeAdmin from './public/private/admin/home/home-admin';
 import Store from './storeApp/appStore';
 
 export const App: FC = () => {
@@ -19,7 +20,9 @@ export const App: FC = () => {
             <Route path="admin-login" element={<AdminLogin />}></Route>
             <Route path="register" element={<AdminRegister />}></Route>
           </Route>
-
+          <Route path="/admin" element={<LayoutPublic />}>
+            <Route path="home" element={<HomeAdmin />}></Route>
+          </Route>
           <Route path="*" element={<Navigate to="/home" replace />}></Route>
         </Routes>
       </BrowserRouter>

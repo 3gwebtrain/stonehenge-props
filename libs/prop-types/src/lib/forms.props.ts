@@ -1,3 +1,5 @@
+import { UserLoginProps } from './user.props';
+
 export interface RegisterFormProps {
   name?: string;
   password: string;
@@ -6,5 +8,5 @@ export interface RegisterFormProps {
 
 export interface RegisterFormFuncProps {
   closePop: () => void;
-  registerSubmit: (values: RegisterFormProps) => void;
+  registerSubmit: (values: UserLoginProps) => void;
 }

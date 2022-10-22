@@ -19,7 +19,7 @@ export function FormLogin({ closePop, registerSubmit }: RegisterFormFuncProps): 
         </Form.Item>
         <Form.Item className={styles['register-footer']}>
           <Button type="primary" htmlType="submit">
-            Form Regiter
+            User Login
           </Button>
           <Button type="primary" onClick={() => closePop()}>
             Cancel
