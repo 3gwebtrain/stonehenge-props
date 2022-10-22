@@ -8,6 +8,7 @@ import HomePublic from './public/home-public/home-public';
 import LayoutPublic from './public/layout-public/layout-public';
 import HomeAdmin from './public/private/admin/home/home-admin';
 import Protected from './public/private/protected/protected';
+import Public from './public/public/public';
 import { AppState } from './storeApp/appStore';
 
 export const App: FC = () => {
@@ -22,9 +23,9 @@ export const App: FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/" element={<LayoutPublic />}>
-          <Route path="home" element={<HomePublic />}></Route>
-          <Route path="admin-login" element={<AdminLogin />}></Route>
-          <Route path="register" element={<AdminRegister />}></Route>
+          <Route path="home" element={<Public children={<HomePublic />} />}></Route>
+          <Route path="admin-login" element={<Public children={<AdminLogin />} />}></Route>
+          <Route path="register" element={<Public children={<AdminRegister />} />}></Route>
         </Route>
         <Route path="/admin" element={<LayoutPublic />}>
           <Route path="home" element={<Protected children={<HomeAdmin />} />}></Route>
