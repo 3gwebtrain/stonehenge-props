@@ -18,17 +18,18 @@ router.post('/register', async (req: Request, res: Response) => {
     req.body.password = hashPassword;
     const newUser = new UserModel(req.body);
     await newUser.save();
-    res.json({ message: 'user created successfully', success: true });
+    return res.json({ message: 'user created successfully', success: true });
   } catch (error) {
-    res.sendStatus(500).json({ message: 'Error creating user', success: false });
+    return res.sendStatus(500).json({ message: 'Error creating user', success: false });
   }
 });
 
 router.post('/admin-login', async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log('email', email, req.body);
+
   try {
     const user = await await UserModel.findOne({ email: email });
+
     if (!user) {
       return res.status(200).json({ message: 'User does not exist', success: false });
     }
@@ -46,11 +47,13 @@ router.post('/admin-login', async (req: Request, res: Response) => {
 router.post('/get-admin-info-by-id', AuthMiddleWare, async (req: Request, res: Response) => {
   try {
     const { userId } = req.body;
-    const user = await UserModel.findOne({ _id: userId });
+    const user = await UserModel.findOne({ _id: userId }).select('-password');
+
     if (!user) {
       return res.send(200).json({ message: 'User does not exist', success: false });
     } else {
-      res.status(200).send({ success: true, data: { name: user.name, email: user.email } });
+      console.log('user', user);
+      res.status(200).send({ success: true, data: user });
     }
   } catch (error) {
     res.status(500).json({ message: 'Error getting user info', success: false, error });

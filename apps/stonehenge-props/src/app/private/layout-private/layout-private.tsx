@@ -26,6 +26,7 @@ const LayoutPrivate: FC = () => {
       );
       dispatch(hideAlert());
       if (response.data.success) {
+        console.log('response', response);
         dispatch(setUser(response.data.data));
       } else {
         localStorage.clear();
@@ -45,13 +46,20 @@ const LayoutPrivate: FC = () => {
     }
     return;
   }, []);
+  const logOut = () => {
+    dispatch(setUser(null));
+    localStorage.clear();
+    navigate('/');
+  };
+
   return (
     <section className={layoutStyle['app-wrapper']}>
       <header className="app-header">
         <nav>
           <h1>
-            Private Header welcomes you! <Link to="profie">{adminUser?.name}</Link>{' '}
+            Private Header welcomes you! <Link to="profie">{adminUser?.name}</Link>
           </h1>
+          <button onClick={() => logOut()}>Logout</button>
         </nav>
       </header>
       <main className="app-main">

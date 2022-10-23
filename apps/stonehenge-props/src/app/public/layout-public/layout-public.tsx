@@ -20,6 +20,7 @@ export function LayoutPublic() {
   const [newChildren, setnewChildren] = useState<ReactElement | undefined>(undefined);
 
   const onRegisterSubmit = (values: RegisterFormProps) => {
+    console.log('on public', values);
     dispatch(registerUser(values));
     setModalActive(false);
   };
