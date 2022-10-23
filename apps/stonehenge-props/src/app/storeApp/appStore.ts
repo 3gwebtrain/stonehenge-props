@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { alertSlice } from '../public/storePublic';
-import { AdminLoginSlice } from '../public/storePublic/loginSlice';
-import { RegisterSlice } from '../public/storePublic/registerSlice';
+import { AdminUserSlice } from '../private/storePrivate';
+import { AdminLoginSlice, alertSlice, RegisterSlice } from '../public/storePublic';
 
 const Store = configureStore({
   reducer: {
     registerSlice: RegisterSlice.reducer,
     adminLoginSlice: AdminLoginSlice.reducer,
     alertSlice: alertSlice.reducer,
+    adminUserSlice: AdminUserSlice.reducer,
   },
 });
 

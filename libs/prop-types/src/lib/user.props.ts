@@ -10,3 +10,10 @@ export interface UserLoginProps {
   password: string;
   status: string;
 }
+
+export interface AdminUserInfoProps {
+  adminUser: {
+    name: string;
+    email: string;
+  } | null;
+}
