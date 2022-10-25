@@ -11,19 +11,21 @@ export interface UserLoginProps {
   status: string;
 }
 
+export interface landLordProps {
+  name: string;
+  email: string;
+  phone: string;
+  address: {
+    street: string;
+    doorNo: string;
+  };
+}
+
 export interface AdminUserInfoProps {
   adminUser: {
     name: string;
     email: string;
   } | null;
-}
-
-export interface LandLordRegisterProps {
-  name: string;
-  email: string;
-  address: {
-    street: string;
-    pin: string;
-  };
-  phone: string;
+  landLords: landLordProps[] | null;
+  status: 'pending' | 'success' | 'failed';
 }

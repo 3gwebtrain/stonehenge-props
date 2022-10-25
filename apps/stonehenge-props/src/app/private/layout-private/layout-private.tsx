@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { FC, useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { hideAlert, showAlert } from '../../public/storePublic';
@@ -51,21 +52,24 @@ const LayoutPrivate: FC = () => {
   };
 
   return (
-    <section className={layoutStyle['app-wrapper']}>
-      <header className="app-header">
-        <nav>
-          <h1>
-            Private Header welcomes you! <Link to="profie">{adminUser?.name}</Link>
-          </h1>
-          <button onClick={() => logOut()}>Logout</button>
-        </nav>
-      </header>
-      <main className="app-main">
-        <h1>Hi </h1>
-        <Outlet />
-      </main>
-      <footer className="app-footer"></footer>
-    </section>
+    <>
+      <Toaster position="top-center" reverseOrder={false} containerStyle={{ fontSize: '14px' }}></Toaster>
+      <section className={layoutStyle['app-wrapper']}>
+        <header className="app-header">
+          <nav>
+            <h1>
+              Private Header welcomes you! <Link to="profie">{adminUser?.name}</Link>
+            </h1>
+            <button onClick={() => logOut()}>Logout</button>
+          </nav>
+        </header>
+        <main className="app-main">
+          <h1>Hi </h1>
+          <Outlet />
+        </main>
+        <footer className="app-footer"></footer>
+      </section>
+    </>
   );
 };
 

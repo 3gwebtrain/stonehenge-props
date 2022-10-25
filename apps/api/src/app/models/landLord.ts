@@ -2,15 +2,7 @@ import * as mongoose from 'mongoose';
 
 const LandLordSchema = new mongoose.Schema(
   {
-    userId: {
-      type: String,
-      required: true,
-    },
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
+    name: {
       type: String,
       required: true,
     },
@@ -18,29 +10,19 @@ const LandLordSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    phoneNumber: {
+    phone: {
       type: String,
       required: true,
     },
     address: {
-      type: String,
-      required: true,
-    },
-    category: {
-      type: String,
-      required: true,
-    },
-    budget: {
-      type: Number,
-      required: true,
-    },
-    fromTime: {
-      type: String,
-      required: true,
-    },
-    toTime: {
-      type: String,
-      required: true,
+      street: {
+        type: String,
+        required: true,
+      },
+      doorNo: {
+        type: String,
+        required: true,
+      },
     },
   },
   { timestamps: true }
