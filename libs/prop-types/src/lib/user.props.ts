@@ -17,3 +17,13 @@ export interface AdminUserInfoProps {
     email: string;
   } | null;
 }
+
+export interface LandLordRegisterProps {
+  name: string;
+  email: string;
+  address: {
+    street: string;
+    pin: string;
+  };
+  phone: string;
+}

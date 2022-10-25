@@ -26,7 +26,6 @@ const LayoutPrivate: FC = () => {
       );
       dispatch(hideAlert());
       if (response.data.success) {
-        console.log('response', response);
         dispatch(setUser(response.data.data));
       } else {
         localStorage.clear();
@@ -41,7 +40,6 @@ const LayoutPrivate: FC = () => {
 
   useEffect(() => {
     if (!adminUser) {
-      console.log('admin user', adminUser);
       getAdminUser();
     }
     return;
