@@ -9,7 +9,7 @@ const HomeAdmin: FC = () => {
   };
 
   const items = [
-    { label: 'Add Landlord', key: 'item-1', children: <AddLandLoard /> }, // remember to pass the key prop
+    { label: 'Add Landlord', key: 'item-1', children: <AddLandLoard regSubmit={registerSubmit} /> }, // remember to pass the key prop
     { label: 'Add Builder', key: 'item-2', children: 'Content 2' },
   ];
   return (
