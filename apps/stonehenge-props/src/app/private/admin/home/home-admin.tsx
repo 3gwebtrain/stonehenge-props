@@ -34,7 +34,7 @@ const HomeAdmin: FC = () => {
         {landLords?.length &&
           landLords.map((loard) => {
             return (
-              <div className="mt-5">
+              <div className="mt-5" key={loard.email}>
                 <Card title={loard.name} bordered={true}>
                   <p>
                     <a href="#">{loard.email}</a>

@@ -36,7 +36,7 @@ router.post('/invite', async (req: Request, res: Response) => {
   try {
     const isUserExist = await LandLoardModel.findOne({ email: email });
     if (!isUserExist) {
-      return res.status(200).json({ message: 'No user found', success: false });
+      return res.status(200).json({ message: 'No landloard found', success: false });
     }
     return res.json({ message: 'Invite sent successfully', success: true });
   } catch (error) {
