@@ -4,7 +4,7 @@ import { Button, Card, Col, Row, Tabs } from 'antd';
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, AppState } from '../../../storeApp/appStore';
-import { addLandLord, listLandLords } from '../../storePrivate';
+import { addLandLord, inviteLandLord, listLandLords } from '../../storePrivate';
 
 const HomeAdmin: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,6 +24,10 @@ const HomeAdmin: FC = () => {
     { label: 'Add Builder', key: 'item-2', children: 'Content 2' },
   ];
 
+  const sendInviteToLandLord = (loard: landLordProps) => {
+    dispatch(inviteLandLord(loard));
+  };
+
   return (
     <Row justify="space-between">
       <Col lg={8}>
@@ -37,8 +41,8 @@ const HomeAdmin: FC = () => {
                   </p>
                   <div>
                     <p>{loard.address.doorNo}</p>
-                    <p style={{ whiteSpace: 'pre' }}>{loard.address.street}</p>
-                    <Button>Send invite</Button>
+                    <p>{loard.address.street}</p>
+                    <Button onClick={() => sendInviteToLandLord(loard)}>Send invite</Button>
                   </div>
                 </Card>
               </div>

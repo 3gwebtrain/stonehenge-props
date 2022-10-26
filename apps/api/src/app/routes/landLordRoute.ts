@@ -22,13 +22,25 @@ router.post('/add-landloard', async (req: Request, res: Response) => {
 router.get('/landloards', async (_, res: Response) => {
   try {
     const isUserExist = await LandLoardModel.find();
-    console.log('isUserExist', isUserExist.length);
     if (!isUserExist.length) {
       return res.status(200).json({ message: 'No user found', success: false });
     }
     return res.json({ landLords: isUserExist, message: 'Landlords fetched successfully', success: true });
   } catch (error) {
     return res.sendStatus(500).json({ message: 'Error fetching landlords', success: false });
+  }
+});
+
+router.post('/invite', async (req: Request, res: Response) => {
+  const { email } = req.body;
+  try {
+    const isUserExist = await LandLoardModel.findOne({ email: email });
+    if (!isUserExist) {
+      return res.status(200).json({ message: 'No user found', success: false });
+    }
+    return res.json({ message: 'Invite sent successfully', success: true });
+  } catch (error) {
+    return res.sendStatus(500).json({ message: 'Error inviting landloard', success: false });
   }
 });
 

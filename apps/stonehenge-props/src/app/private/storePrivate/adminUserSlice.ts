@@ -39,6 +39,21 @@ export const listLandLords = createAsyncThunk('list/landLord', async () => {
   }
 });
 
+export const inviteLandLord = createAsyncThunk('list/invite', async (invite: landLordProps) => {
+  try {
+    const response = (await axios.post<landLordProps>(environment.BASE_URL + '/landloard/invite', invite)) as AxiosResponse;
+    if (response.data.success) {
+      toast.success(response.data.message);
+      return response.data.landLords;
+    } else {
+      toast.error(response.data.message);
+    }
+  } catch (error: unknown) {
+    const err = error as AxiosError;
+    throw new Error(err.message);
+  }
+});
+
 export const AdminUserSlice = createSlice({
   name: 'AdminUser',
   initialState: initialUser,
