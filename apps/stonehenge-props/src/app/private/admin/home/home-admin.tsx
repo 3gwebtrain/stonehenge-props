@@ -10,7 +10,9 @@ const HomeAdmin: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { landLords } = useSelector((state: AppState) => state.adminUserSlice);
   const registerSubmit = (values: landLordProps) => {
-    dispatch(addLandLord(values));
+    dispatch(addLandLord({ ...values, active: false })).then(() => {
+      dispatch(listLandLords());
+    });
   };
 
   useEffect(() => {
@@ -20,8 +22,7 @@ const HomeAdmin: FC = () => {
   }, []);
 
   const items = [
-    { label: 'Add Landlord', key: 'item-1', children: <AddLandLoard regSubmit={registerSubmit} /> }, // remember to pass the key prop
-    { label: 'Add Builder', key: 'item-2', children: 'Content 2' },
+    { label: 'Add User', key: 'item-1', children: <AddLandLoard regSubmit={registerSubmit} /> }, // remember to pass the key prop
   ];
 
   const sendInviteToLandLord = (loard: landLordProps) => {
@@ -52,9 +53,6 @@ const HomeAdmin: FC = () => {
       <Col lg={8}>
         <Tabs items={items}>
           <Tabs.TabPane tab="Tab 1" key="item-1"></Tabs.TabPane>
-          <Tabs.TabPane tab="Tab 2" key="item-2">
-            Content xx
-          </Tabs.TabPane>
         </Tabs>
       </Col>
     </Row>

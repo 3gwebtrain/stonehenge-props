@@ -14,6 +14,14 @@ const LandLordSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      required: true,
+    },
+    active: {
+      type: Boolean,
+      required: true,
+    },
     address: {
       street: {
         type: String,

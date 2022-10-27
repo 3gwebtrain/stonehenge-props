@@ -52,7 +52,6 @@ router.post('/get-admin-info-by-id', AuthMiddleWare, async (req: Request, res: R
     if (!user) {
       return res.send(200).json({ message: 'User does not exist', success: false });
     } else {
-      console.log('user', user);
       res.status(200).send({ success: true, data: user });
     }
   } catch (error) {

@@ -15,6 +15,8 @@ export interface landLordProps {
   name: string;
   email: string;
   phone: string;
+  role: string;
+  active: boolean;
   address: {
     street: string;
     doorNo: string;

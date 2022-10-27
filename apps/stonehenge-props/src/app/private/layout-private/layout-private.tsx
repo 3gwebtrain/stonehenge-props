@@ -30,12 +30,12 @@ const LayoutPrivate: FC = () => {
         dispatch(setUser(response.data.data));
       } else {
         localStorage.clear();
-        navigate('/admin');
+        navigate('/home');
       }
     } catch (error) {
       dispatch(hideAlert());
       localStorage.clear();
-      navigate('/admin');
+      navigate('/home');
     }
   };
 
